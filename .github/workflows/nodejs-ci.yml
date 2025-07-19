@@ -1,0 +1,41 @@
+name: CI/CD Pipeline for Node.js
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🧪 Run tests
+        run: npm test
+
+      - name: 🏗️ Build app
+        run: |
+          echo "Building the app..."
+          # Add actual build command if you use bundlers like webpack
+          # For simple apps, this might be just a placeholder
+          npm run build || echo "No build script defined"
+
+      - name: 🚀 Deploy to Render
+        if: success()
+        run: |
+          echo "Triggering Render deploy..."
+          curl -X POST "$RENDER_DEPLOY_HOOK"
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
