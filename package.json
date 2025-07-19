@@ -1,10 +1,10 @@
 {
   "name": "ica-2-distributed",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build:css": "npx tailwindcss -i ./assets/css/tailwind.css -o ./public/css/style.css --minify"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,11 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
-    "jest": "^30.0.4"
-  }
+    "jest": "^30.0.4",
+    "tailwindcss": "^4.1.11"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "description": ""
 }
