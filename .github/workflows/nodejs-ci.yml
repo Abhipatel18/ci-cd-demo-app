@@ -11,28 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: 🟢 Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: 🧪 Run tests
+      - name: Run tests
         run: npm test
 
-      - name: 🏗️ Build app
+      - name: Build app
         run: |
           echo "Building the app..."
           # Add actual build command if you use bundlers like webpack
           # For simple apps, this might be just a placeholder
           npm run build || echo "No build script defined"
 
-      - name: 🚀 Deploy to Render
+      - name: Deploy to Render
         if: success()
         run: |
           echo "Triggering Render deploy..."
